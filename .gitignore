@@ -1,0 +1,5 @@
+node_modules/
+**-lock.json
+**-error.log
+**.lock
+.env
