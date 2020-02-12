@@ -1,11 +1,11 @@
 import Service from '../../core/Service';
 import UserRepository from './repository';
-export default class UserService extends Service {
 
+export default class UserService extends Service {
   static instance;
 
   constructor() {
-    super()
+    super();
     this.repository = UserRepository.getRepository();
   }
 
@@ -19,5 +19,4 @@ export default class UserService extends Service {
   getRepository() {
     return this.repository;
   }
-
 }

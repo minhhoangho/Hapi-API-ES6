@@ -1,31 +1,20 @@
-import UserController from './controller';
-import UserValidator from './validator';
+import UserHandler from './handler';
 
-class UserRoutes {
-  register(server) {
-    const controller = new UserController();
-    const validator = new UserValidator();
-    server.bind(controller);
-
+export default class UserRoutes {
+  bind(handler) {
     const routes = [
       {
         method: 'GET',
         path: '/api/v1/users',
-        options: {
-          tags: ['api', 'v1'],
-          description: 'Get all user',
-          notes: 'Return all users',
-          handler: controller.getMany,
-          auth: false,
-          validate: {
-            query: validator.queryParams
-          }
-        }
+        options: handler.getMany
       }
     ];
+    return routes;
+  }
 
+  register(server) {
+    const handler = new UserHandler(server);
+    const routes = this.bind(handler);
     server.route(routes);
   }
 }
-
-export default UserRoutes;

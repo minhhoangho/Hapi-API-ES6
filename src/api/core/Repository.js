@@ -16,11 +16,7 @@ export default class Repository {
       }
     ]
   }) {
-    if (
-      this.model.deleted_at &&
-      condition &&
-      condition.deletedAt === undefined
-    ) {
+    if (this.model.deleted_at && condition && condition.deletedAt === undefined) {
       condition.deleted_at = null;
     }
 

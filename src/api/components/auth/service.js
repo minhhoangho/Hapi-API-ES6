@@ -1,8 +1,9 @@
 import _ from 'lodash';
+import Boom from '@hapi/boom';
 import Service from '../../core/Service';
 import UserRepository from './repository';
-import bcrypt from '../../../services/bcrypt';
-import JWT from '../../../services/jwt';
+import bcrypt from '../../../services/Bcrypt';
+import JWT from '../../../services/Jwt';
 
 export default class UserService extends Service {
   static instance;
@@ -24,29 +25,25 @@ export default class UserService extends Service {
   }
 
   async login(payload) {
-    try {
-      const { username, password } = payload;
-      const user = await this.repository.getOneUserAndRole({ username }, [
-        'id',
-        'fullName',
-        'username',
-        'password'
-      ]);
+    const { username, password } = payload;
+    const user = await this.repository.getOneUserAndRole({ username }, [
+      'id',
+      'fullName',
+      'username',
+      'password'
+    ]);
 
-      if (!user || !bcrypt.compareSync(password, user.password)) {
-        return Boom.badRequest('User or password incorrect');
-      }
-      return _.assign(
-        {
-          token: JWT.issue({
-            id: user.id,
-            scope: user.role.name
-          })
-        },
-        user
-      );
-    } catch (error) {
-      throw error;
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+      return Boom.badRequest('User or password incorrect');
     }
+    return _.assign(
+      {
+        token: JWT.issue({
+          id: user.id,
+          scope: user.role.name
+        })
+      },
+      user
+    );
   }
 }

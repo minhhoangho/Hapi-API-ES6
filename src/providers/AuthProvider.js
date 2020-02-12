@@ -1,7 +1,7 @@
-import * as HapiAuthJwt2 from 'hapi-auth-jwt2';
+import HapiAuthJwt2 from 'hapi-auth-jwt2';
 import User from '../database/models/User';
 import logger from '../utils/Winston';
-import * as Configs from '../configs';
+import Configs from '../configs';
 
 const serverConfigs = Configs.getServerConfigs();
 export default class AuthProvider {
@@ -16,6 +16,7 @@ export default class AuthProvider {
 
     server.auth.default('jwt');
   }
+
   async register(server) {
     /**
      * Validate user

@@ -4,6 +4,7 @@ import AuthProvider from '../providers/AuthProvider';
 import KnexProvider from '../providers/KnexProvider';
 import { banner } from './banner';
 import logger from '../utils/Winston';
+
 export default class ServerLoader {
   static async boot() {
     try {

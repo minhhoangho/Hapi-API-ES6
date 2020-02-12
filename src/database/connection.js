@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import * as Pg from 'pg';
+import Pg from 'pg';
 import knexFile from '../../knexfile';
 
 Pg.types.setTypeParser(20, 'text', parseInt);

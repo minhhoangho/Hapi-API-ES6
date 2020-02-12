@@ -45,7 +45,8 @@ const logger = winston.createLogger({
 
 // create a stream object with a 'write' function that will be used by `morgan`
 logger.morganStream = {
-  write: function(message, encoding) {
+  // eslint-disable-next-line no-unused-vars
+  write(message, encoding) {
     // use the 'info' log level so the output will be picked up by both transports (file and console)
     logger.info(message.substring(0, message.lastIndexOf('\n')));
   }

@@ -1,5 +1,5 @@
 export const up = async knex =>
-  await knex.schema.createTable('roles', table => {
+  knex.schema.createTable('roles', table => {
     table.increments('id').primary();
     table.string('name').unique();
     table.string('description');
@@ -7,5 +7,4 @@ export const up = async knex =>
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 
-export const down = async knex =>
-  await knex.schema.dropTableIfExists('roles');
+export const down = async knex => knex.schema.dropTableIfExists('roles');

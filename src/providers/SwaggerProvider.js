@@ -1,6 +1,6 @@
-import * as Inert from '@hapi/inert';
-import * as Vision from '@hapi/vision';
-import * as HapiSwagger from 'hapi-swagger';
+import Inert from '@hapi/inert';
+import Vision from '@hapi/vision';
+import HapiSwagger from 'hapi-swagger';
 import logger from '../utils/Winston';
 
 export default class SwaggerProvider {
@@ -39,6 +39,7 @@ export default class SwaggerProvider {
       }
     ];
   }
+
   async register(server) {
     this.setting();
     try {

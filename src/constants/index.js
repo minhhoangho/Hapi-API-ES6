@@ -1,7 +1,6 @@
 const ROLE = {
-  SUPER_ADMIN: 1,
-  ADMIN: 2,
-  USER: 3
+  ADMIN: 1,
+  USER: 2
 };
 
 export { ROLE };

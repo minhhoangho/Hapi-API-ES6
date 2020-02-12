@@ -1,5 +1,5 @@
 import sample from './samples';
-import bcrypt from '../../../services/bcrypt';
+import bcrypt from '../../../services/Bcrypt';
 
 class Factory {
   static users(number) {

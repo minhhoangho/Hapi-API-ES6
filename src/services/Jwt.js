@@ -1,15 +1,10 @@
-import * as JWT from 'jsonwebtoken';
+import JWT from 'jsonwebtoken';
 import _assign from 'lodash/assign';
-import * as Configs from '../configs/index';
+import Configs from '../configs/index';
 
 class Jwt {
-  secret;
-
-  expiresIn;
-
   constructor() {
-    this.secret =
-      process.env.JWT_SECRET || Configs.getServerConfigs().jwtSecret;
+    this.secret = process.env.JWT_SECRET || Configs.getServerConfigs().jwtSecret;
     this.expiresIn = '7d';
   }
 

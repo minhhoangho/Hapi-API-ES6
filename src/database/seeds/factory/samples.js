@@ -1,5 +1,6 @@
-import * as faker from 'faker';
-import bcrypt from '../../../services/bcrypt';
+import faker from 'faker';
+import bcrypt from '../../../services/Bcrypt';
+
 class Sample {
   createUsers = roleId => ({
     fullName: faker.name.findName(),

@@ -1,5 +1,6 @@
 import BaseModel from './BaseModel';
 import Role from './Role';
+
 export default class User extends BaseModel {
   static $hidden = ['password'];
 
@@ -10,6 +11,7 @@ export default class User extends BaseModel {
   $beforeUpdate() {
     this.updatedAt = new Date().toISOString();
   }
+
   static get relationMappings() {
     return {
       role: {

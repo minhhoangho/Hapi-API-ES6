@@ -9,6 +9,7 @@ export default class Role extends BaseModel {
   $beforeUpdate() {
     this.updatedAt = new Date().toISOString();
   }
+
   static get relationMappings() {
     return {
       users: {

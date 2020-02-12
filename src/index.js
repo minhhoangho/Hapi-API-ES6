@@ -1,4 +1,5 @@
-import * as Env from 'dotenv';
-Env.config();
+import Env from 'dotenv';
 import Server from './bootstrap';
+
+Env.config();
 Server.boot();

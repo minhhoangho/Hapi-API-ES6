@@ -1,14 +1,11 @@
-import * as Bcrypt from 'bcrypt';
-import * as Configs from '../configs/index';
+import Bcrypt from 'bcrypt';
+import Configs from '../configs/index';
 
 const bcryptConfigs = Configs.getBcryptConfigs();
 
 class BcryptUtils {
-  saltRounds;
-
   constructor() {
-    this.saltRounds =
-      parseInt(process.env.SALT_ROUNDS, 10) || bcryptConfigs.saltRounds;
+    this.saltRounds = parseInt(process.env.SALT_ROUNDS, 10) || bcryptConfigs.saltRounds;
   }
 
   hash(password) {

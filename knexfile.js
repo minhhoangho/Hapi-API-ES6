@@ -1,5 +1,6 @@
-import * as path from 'path';
-import * as Env from 'dotenv';
+import path from 'path';
+import Env from 'dotenv';
+
 Env.config();
 
 const BASE_DB_PATH = path.join(__dirname, 'src', 'database');

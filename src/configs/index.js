@@ -4,14 +4,15 @@ import Config from './config';
 // Read Configurations
 const configs = _get(Config, `${process.env.NODE_ENV || 'development'}Config`);
 
-export function getDatabaseConfig() {
-  return _get(configs, 'database');
-}
-
-export function getServerConfigs() {
+const getServerConfigs = () => {
   return _get(configs, 'server');
-}
+};
 
-export function getBcryptConfigs() {
+const getBcryptConfigs = () => {
   return _get(configs, 'bcrypt');
-}
+};
+
+export default {
+  getServerConfigs,
+  getBcryptConfigs
+};

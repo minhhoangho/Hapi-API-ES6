@@ -1,6 +1,6 @@
 import { QueryBuilder, Model } from 'objection';
-import Knex from '../connection';
 import _ from 'lodash';
+import Knex from '../connection';
 
 /**
  * initial config model with knex

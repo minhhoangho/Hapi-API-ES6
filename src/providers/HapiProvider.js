@@ -1,5 +1,5 @@
-import * as Hapi from '@hapi/hapi';
-import * as Configs from '../configs';
+import Hapi from '@hapi/hapi';
+import Configs from '../configs';
 import { bind } from '../api/routes';
 import logger from '../utils/Winston';
 
@@ -17,6 +17,8 @@ export default class HapiProvider {
     const routes = bind(server);
     Promise.all(routes);
   }
+
+  // eslint-disable-next-line consistent-return
   async register() {
     try {
       const server = new Hapi.Server({

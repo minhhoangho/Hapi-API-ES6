@@ -1,5 +1,5 @@
 export const up = async knex =>
-  await knex.schema.createTable('users', table => {
+  knex.schema.createTable('users', table => {
     table.increments('id').primary();
     table.integer('roleId');
     table
@@ -15,4 +15,4 @@ export const up = async knex =>
     table.timestamp('deletedAt').defaultTo(null);
   });
 
-export const down = async knex => await knex.schema.dropTableIfExists('users');
+export const down = async knex => knex.schema.dropTableIfExists('users');

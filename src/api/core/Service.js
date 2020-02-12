@@ -2,6 +2,7 @@ import Boom from '@hapi/boom';
 
 export default class Service {
   repository = null;
+
   getMany(query) {
     return this.repository.getMany(query);
   }

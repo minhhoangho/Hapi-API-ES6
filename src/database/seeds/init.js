@@ -1,6 +1,7 @@
 import { Factory } from './factory';
 import Role from '../models/Role';
 import User from '../models/User';
+
 exports.seed = async knex => {
   await knex('roles').del();
   await Promise.all([knex('users').del()]);
