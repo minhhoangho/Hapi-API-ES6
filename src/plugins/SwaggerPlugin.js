@@ -3,7 +3,7 @@ import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
 import logger from '../utils/Winston';
 
-export default class SwaggerProvider {
+export default class SwaggerPlugin {
   setting() {
     const swaggerOptions = {
       host: process.env.APP_HOST,
@@ -23,8 +23,7 @@ export default class SwaggerProvider {
       },
       security: [{ Bearer: [] }],
       swaggerUI: true,
-      documentationPage: process.env.NODE_ENV !== 'production',
-      documentationPath: '/docs'
+      documentationPage: process.env.NODE_ENV !== 'production'
     };
     this.plugins = [
       {

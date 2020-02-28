@@ -4,6 +4,5 @@ import AuthRoutes from './components/auth/routes';
 
 export const bind = server => {
   const routes = [new AuthRoutes().register(server), new UserRoutes().register(server)];
-
   return _flattenDeep(routes);
 };

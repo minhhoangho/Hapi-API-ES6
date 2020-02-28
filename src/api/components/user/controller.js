@@ -6,4 +6,9 @@ export default class UserController extends Controller {
     super();
     this.service = UserService.getService();
   }
+
+  getMe(request) {
+    const { id } = request.auth.credentials;
+    return this.service.getOne(id);
+  }
 }

@@ -1,7 +1,7 @@
 import AuthHandler from './handler';
 
 export default class AuthRoutes {
-  bind(handler) {
+  bind = handler => {
     const routes = [
       {
         method: 'POST',
@@ -10,7 +10,7 @@ export default class AuthRoutes {
       }
     ];
     return routes;
-  }
+  };
 
   register(server) {
     const handler = new AuthHandler(server);

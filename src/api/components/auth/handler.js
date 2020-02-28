@@ -14,10 +14,10 @@ class AuthHandler {
       description: 'Login',
       notes: 'Return login user',
       handler: this.controller.login,
-      auth: false,
-      validate: {
-        payload: this.validator.payloadLogin
-      }
+      auth: false
+      // validate: {
+      //   payload: this.validator.payloadLogin
+      // }
     };
   };
 }

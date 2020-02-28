@@ -7,6 +7,11 @@ export default class UserRoutes {
         method: 'GET',
         path: '/api/v1/users',
         options: handler.getMany
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/users/me',
+        options: handler.getMe
       }
     ];
     return routes;
@@ -15,6 +20,7 @@ export default class UserRoutes {
   register(server) {
     const handler = new UserHandler(server);
     const routes = this.bind(handler);
+
     server.route(routes);
   }
 }

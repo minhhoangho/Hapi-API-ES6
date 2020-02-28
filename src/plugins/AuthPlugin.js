@@ -4,7 +4,7 @@ import logger from '../utils/Winston';
 import Configs from '../configs';
 
 const serverConfigs = Configs.getServerConfigs();
-export default class AuthProvider {
+export default class AuthPlugin {
   async setAuthStrategy(server, { config, validate }) {
     server.auth.strategy('jwt', 'jwt', {
       validate,
@@ -22,7 +22,7 @@ export default class AuthProvider {
      * Validate user
      */
     try {
-      const validateUser = async (decoded, request) => {
+      const validateUser = async (decoded, request = null) => {
         const user = await User.query().findById(decoded.id);
         if (!user) {
           return { isValid: false };

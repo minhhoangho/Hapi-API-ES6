@@ -8,18 +8,24 @@ class UserHandler {
     server.bind(this.controller);
   }
 
-  getMany = () => {
-    return {
-      tags: ['api', 'v1'],
-      description: 'Get all user',
-      notes: 'Return all users',
-      handler: this.controller.getMany,
-      auth: false,
-      validate: {
-        query: this.validator.queryParams
-      }
-    };
-  };
+  getMany = () => ({
+    tags: ['api', 'v1'],
+    description: 'Get all user',
+    notes: 'Return all users',
+    handler: this.controller.getMany,
+    auth: false,
+    validate: {
+      query: this.validator.queryParams
+    }
+  });
+
+  getMe = () => ({
+    tags: ['api', 'v1'],
+    description: 'Get one user',
+    notes: 'Return all users',
+    handler: this.controller.getMe,
+    auth: 'jwt'
+  });
 }
 
 export default UserHandler;

@@ -2,8 +2,9 @@ import Hapi from '@hapi/hapi';
 import Configs from '../configs';
 import { bind } from '../api/routes';
 import logger from '../utils/Winston';
+import AuthPlugin from '../plugins/AuthPlugin';
+import SwaggerPlugin from '../plugins/SwaggerPlugin';
 
-// import SwaggerLoader from './SwaggerLoader';
 export default class HapiProvider {
   constructor() {
     this.port = process.env.APP_PORT || Configs.getServerConfigs().port;
@@ -30,7 +31,10 @@ export default class HapiProvider {
           }
         }
       });
+      await new AuthPlugin().register(server);
+      await new SwaggerPlugin().register(server);
       await this.setting(server);
+
       logger.info('> Hapi OK');
       return server;
     } catch (error) {
