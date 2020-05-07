@@ -1,6 +1,6 @@
 import _flattenDeep from 'lodash/flattenDeep';
-import UserRoutes from './components/user/routes';
-import AuthRoutes from './components/auth/routes';
+import UserRoutes from './modules/user/routes';
+import AuthRoutes from './modules/auth/routes';
 
 export const bind = server => {
   const routes = [new AuthRoutes().register(server), new UserRoutes().register(server)];
