@@ -5,7 +5,7 @@ Env.config();
 
 const BASE_DB_PATH = path.join(__dirname, 'src', 'database');
 
-module.exports = {
+export default {
   development: {
     client: 'pg',
     connection: process.env.DATABASE_URL_DEV,

@@ -6,7 +6,7 @@ import logger from '../utils/Winston';
 export default class SwaggerPlugin {
   setting() {
     const swaggerOptions = {
-      host: process.env.APP_HOST,
+      host: process.env.HOST || `${process.env.APP_HOST}:${process.env.APP_PORT}`,
       basePath: '/api',
       pathPrefixSize: 3,
       info: {
@@ -23,7 +23,8 @@ export default class SwaggerPlugin {
       },
       security: [{ Bearer: [] }],
       swaggerUI: true,
-      documentationPage: process.env.NODE_ENV !== 'production'
+      documentationPage: process.env.NODE_ENV !== 'production',
+      documentationPath: process.env.SWAGGER_ROUTE || '/docs'
     };
     this.plugins = [
       {

@@ -3,15 +3,10 @@ export default class Controller {
     return this.service.getMany(request.query);
   }
 
-  count(request) {
-    return this.service.count();
-  }
-
   getOne(request) {
     const { id } = request.params;
     return this.service.getOne(id);
   }
-
   createOne(request) {
     const { payload } = request;
     return this.service.createOne(payload);
@@ -26,5 +21,18 @@ export default class Controller {
   deleteOne(request) {
     const { id } = request.params;
     return this.service.deleteOne(id);
+  }
+
+  deleteMultiple(request) {
+    const { ids } = request.payload;
+    return this.service.deleteMultiple(ids);
+  }
+
+  getCredentialInfo(request) {
+    if (request.auth.isAuthenticated) {
+      const { id: userId, scope } = request.auth.credentials;
+      return { userId, scope };
+    }
+    return { userId: null, scope: null };
   }
 }

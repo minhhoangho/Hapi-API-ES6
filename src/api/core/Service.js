@@ -7,8 +7,8 @@ export default class Service {
     return this.repository.getMany(query);
   }
 
-  count() {
-    return this.repository.count();
+  getByIds(ids) {
+    return this.repository.getByIds(ids);
   }
 
   async getOne(id) {
@@ -19,8 +19,8 @@ export default class Service {
     return result;
   }
 
-  createOne(payload) {
-    return this.repository.createOne(payload);
+  create(data) {
+    return this.repository.create(data);
   }
 
   async updateOne(id, payload) {
@@ -31,10 +31,17 @@ export default class Service {
     return result;
   }
 
+  updateMany(payload) {
+    return this.repository.updateMany(payload);
+  }
+
   async deleteOne(id) {
     await this.repository.deleteOne(id);
-    return {
-      success: true
-    };
+    return { success: true };
+  }
+
+  async deleteMultiple(ids) {
+    await this.repository.deleteMultiple(ids);
+    return { success: true };
   }
 }

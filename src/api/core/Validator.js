@@ -9,19 +9,45 @@ export default class Validator {
     limit: Joi.number()
       .integer()
       .min(1)
-      .max(50)
+      .max(100)
       .default(10),
-    page: Joi.number()
+    offset: Joi.number()
       .integer()
       .default(0),
-    orders: Joi.array(),
-    condition: Joi.object({}),
+    orderBy: Joi.string().default('-id'),
+    filter: Joi.object().default({}),
+    fields: Joi.array()
+  });
+
+  
+  queryParamsAllowedAll = Joi.object({
+    limit: Joi.number()
+      .integer()
+      .min(1)
+      .max(100)
+      .default(10)
+      .allow(-1),
+    offset: Joi.number()
+      .integer()
+      .default(0),
+    orderBy: Joi.string().default('-id'),
+    filter: Joi.object().default({}),
     fields: Joi.array()
   });
 
   strPhoneNumber = Joi.string().regex(/^[0-9+ ]{10,15}$/);
 
-  strEmail = Joi.string()
-    .email()
-    .required();
+  strEmail = Joi.string().email();
+
+  strDate = Joi.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+
+  payloadDeleteMultiple = {
+    ids: Joi.array()
+      .items(
+        Joi.number()
+          .integer()
+          .required()
+      )
+      .required()
+  };
 }
