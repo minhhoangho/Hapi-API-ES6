@@ -8,6 +8,8 @@ export function generateRandStr(length, type = 'mix') {
     characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   } else if (type === 'numeric') {
     characters = '0123456789';
+  }else if(type==='mixIgnoreCase') {
+    characters = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
   }
   let result = '';
   const charactersLength = characters.length;
@@ -35,31 +37,14 @@ export function naturalOrderBy(a, b) {
   });
 }
 
-export function getStatisticalTimeRange() {
-  const thisMonth = moment();
-  const tmMonth = thisMonth.format('M');
-  const tmYear = thisMonth.format('YYYY');
 
-  const lastMonth = thisMonth.add(-1, 'months');
-  const lmMonth = lastMonth.format('M');
-  const lmYear = lastMonth.format('YYYY');
-
-  return {
-    tmMonth,
-    tmYear,
-    lmMonth,
-    lmYear
-  };
-}
-
-export function calculateGrowth(thisMonthGrowth, lastMonthGrowth) {
-  let percent;
-  if (lastMonthGrowth === 0) {
-    percent = 1;
-  } else if (thisMonthGrowth === 0) {
-    percent = -1;
-  } else {
-    percent = thisMonthGrowth / lastMonthGrowth - 1;
+export function Exception(boom,{message=null, description="No description"} ) {
+  if(message) {
+    boom.output.payload["message"] = message;
   }
-  return percent * 100;
+  boom.output.payload["description"] = description
+  return boom
 }
+
+
+

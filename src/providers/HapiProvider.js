@@ -31,6 +31,23 @@ export default class HapiProvider {
           }
         }
       });
+      server.ext('onPreResponse', (request, h) =>  {
+        const response = request.response
+    
+  
+
+        if(response.isBoom && !response.output.headers['version'] ) {
+          // && !response.output.headers['version']
+          response.output.headers['version'] = process.env.VERSION || '1.0.0'
+          return h.continue
+        }
+        if(!response.headers['version']) {
+          response.header('version', process.env.VERSION || '1.0.0')
+          return response
+        }
+        return h.continue
+
+      });
       await new AuthPlugin().register(server);
       await new SwaggerPlugin().register(server);
       await this.setting(server);
