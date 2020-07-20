@@ -34,6 +34,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.8",
     "lodash": "^4.17.15",
+    "moment": "^2.27.0",
     "objection": "^2.1.2",
     "objection-filter": "github:laptrinhsgroup/objection-filter#eae3f0cd52e165a14a5630ce6a5100c72be407da",
     "pg": "^7.18.1",
@@ -55,7 +56,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "eslint-watch": "^6.0.1",
-    "plop": "^2.7.1",
     "prettier": "^1.19.1"
   }
 }

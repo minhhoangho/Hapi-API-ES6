@@ -4,6 +4,8 @@ import Service from '../../core/Service';
 import UserRepository from './repository';
 import bcrypt from '../../../services/Bcrypt';
 import JWT from '../../../services/Jwt';
+import {Exception} from '../../../utils/Helper'
+import { INVALID_EMAIL_PASSWORD } from '../../../constants/errors/Authorization';
 
 export default class UserService extends Service {
   static instance;
@@ -25,8 +27,13 @@ export default class UserService extends Service {
   }
 
   async login(payload) {
-    const { username, password } = payload;
-    const user = await this.repository.getOneUserAndRole({ username }, [
+    const {
+      username,
+      password
+    } = payload;
+    const user = await this.repository.getOneUserAndRole({
+      username
+    }, [
       'id',
       'fullName',
       'username',
@@ -34,10 +41,9 @@ export default class UserService extends Service {
     ]);
 
     if (!user || !bcrypt.compareSync(password, user.password)) {
-      return Boom.badRequest('User or password incorrect');
+      throw Exception(Boom.badRequest() , INVALID_EMAIL_PASSWORD)
     }
-    return _.assign(
-      {
+    return _.assign({
         token: JWT.issue({
           id: user.id,
           scope: user.role.name
