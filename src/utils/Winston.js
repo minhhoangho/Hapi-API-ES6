@@ -1,6 +1,16 @@
 import winston from 'winston';
 import path from 'path';
 
+const levels = { 
+  error: 0, 
+  warn: 1, 
+  info: 2, 
+  verbose: 3, 
+  debug: 4, 
+  silly: 5 
+}
+
+
 const options = {
   file: {
     level: 'info',
@@ -43,6 +53,8 @@ const logger = winston.createLogger({
   exitOnError: false
 });
 
+
+
 // create a stream object with a 'write' function that will be used by `morgan`
 logger.morganStream = {
   // eslint-disable-next-line no-unused-vars
@@ -51,5 +63,6 @@ logger.morganStream = {
     logger.info(message.substring(0, message.lastIndexOf('\n')));
   }
 };
+
 
 export default logger;
