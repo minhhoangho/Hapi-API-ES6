@@ -15,11 +15,17 @@ class AuthHandler {
       tags: ['api'],
       description: 'Login',
       notes: 'Return login user',
-      handler: async (req, h) => {
-        const response =  h.response(await this.controller.login(req))
-        response.headers = {"version": "1.0.1"}
-        // or response.header('version', '1.0.1')
-        return response
+      handler: this.controller.login,
+      ext: { // use for extra middleware
+        onPreResponse: {
+          method: (request, h) =>
+            this.middleware.onPreResponse(request, {
+              'version': '1.0.1',
+              // 'web-version': '1.2.1',
+              'android-version': '1.2.1',
+              'ios-version': '1.3.1'
+            })
+        }
       },
       auth: false,
       validate: {
