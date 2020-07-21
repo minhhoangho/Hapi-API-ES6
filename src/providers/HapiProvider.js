@@ -4,7 +4,7 @@ import { bind } from '../api/routes';
 import logger from '../utils/Winston';
 import AuthPlugin from '../plugins/AuthPlugin';
 import SwaggerPlugin from '../plugins/SwaggerPlugin';
-
+import errorCode from '../constants/errors'
 export default class HapiProvider {
   constructor() {
     this.port = process.env.APP_PORT || Configs.getServerConfigs().port;
@@ -33,20 +33,19 @@ export default class HapiProvider {
       });
       server.ext('onPreResponse', (request, h) =>  {
         const response = request.response
-    
-  
-
-        if(response.isBoom && !response.output.headers['version'] ) {
-          // && !response.output.headers['version']
+        if(response.isBoom) {
           response.output.headers['version'] = process.env.VERSION || '1.0.0'
+          response.output.headers['web-version'] = process.env.WEB_VERSION || '1.0.0'
+          response.output.headers['android-version'] = process.env.ANDROID_VERSION || '1.0.0'
+          response.output.headers['ios-version'] = process.env.IOS_VERSION || '1.0.0'
+          response.output.payload.description = errorCode[response.output.payload.message] || 'No description'
           return h.continue
-        }
-        if(!response.headers['version']) {
-          response.header('version', process.env.VERSION || '1.0.0')
-          return response
-        }
+        } 
+        response.headers['version'] = process.env.VERSION || '1.0.0';
+        response.headers['web-version'] = process.env.WEB_VERSION || '1.0.0';
+        response.headers['android-version'] = process.env.ANDROID_VERSION || '1.0.0';
+        response.headers['ios-version'] = process.env.IOS_VERSION || '1.0.0';
         return h.continue
-
       });
       await new AuthPlugin().register(server);
       await new SwaggerPlugin().register(server);
