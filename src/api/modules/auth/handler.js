@@ -6,7 +6,7 @@ class AuthHandler {
   constructor(server) {
     this.controller = new AuthController();
     this.validator = new AuthValidator();
-    this.middleware = new AuthMiddleware()
+    this.middleware = new AuthMiddleware();
     server.bind(this.controller);
   }
 
@@ -16,11 +16,12 @@ class AuthHandler {
       description: 'Login',
       notes: 'Return login user',
       handler: this.controller.login,
-      ext: { // use for extra middleware
+      ext: {
+        // use for extra middleware
         onPreResponse: {
           method: (request, h) =>
             this.middleware.onPreResponse(request, {
-              'version': '1.0.1',
+              version: '1.0.1',
               // 'web-version': '1.2.1',
               'android-version': '1.2.1',
               'ios-version': '1.3.1'
