@@ -1,26 +1,25 @@
 import UserHandler from './handler';
 
 export default class UserRoutes {
-  bind(handler) {
+  constructor(server) {
+    this.handler = new UserHandler(server);
+    const routes = this.bindRoutes();
+    server.route(routes);
+  }
+
+  bindRoutes() {
     const routes = [
       {
         method: 'GET',
         path: '/api/v1/users',
-        options: handler.getMany
+        options: this.handler.getMany
       },
       {
         method: 'GET',
         path: '/api/v1/users/me',
-        options: handler.getMe
+        options: this.handler.getMe
       }
     ];
     return routes;
-  }
-
-  register(server) {
-    const handler = new UserHandler(server);
-    const routes = this.bind(handler);
-
-    server.route(routes);
   }
 }

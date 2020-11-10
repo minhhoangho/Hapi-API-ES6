@@ -1,20 +1,20 @@
 import AuthHandler from './handler';
 
 export default class AuthRoutes {
-  bind = handler => {
+  constructor(server) {
+    this.handler = new AuthHandler(server);
+    const routes = this.bindRoutes();
+    server.route(routes);
+  }
+
+  bindRoutes = () => {
     const routes = [
       {
         method: 'POST',
         path: '/api/v1/auth/login',
-        options: handler.login
+        options: this.handler.login
       }
     ];
     return routes;
   };
-
-  register(server) {
-    const handler = new AuthHandler(server);
-    const routes = this.bind(handler);
-    server.route(routes);
-  }
 }

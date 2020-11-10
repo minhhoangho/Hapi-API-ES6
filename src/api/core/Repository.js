@@ -3,6 +3,7 @@ export default class Repository {
     this.model = model;
     this.modelName = model.getTableName();
   }
+
   getMany(query, relationships = []) {
     query = this.model.queryBuilder(query).withSoftDelete();
     return this.linkRelationships(query, relationships);

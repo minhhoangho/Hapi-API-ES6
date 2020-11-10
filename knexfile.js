@@ -36,7 +36,7 @@ export default {
 
   staging: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL_PRODUCTIOn,
+    connection: process.env.DATABASE_URL_STAGING,
     pool: {
       min: 2,
       max: 10
@@ -53,7 +53,7 @@ export default {
 
   production: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URL_PRODUCTION,
     pool: {
       min: 2,
       max: 10
